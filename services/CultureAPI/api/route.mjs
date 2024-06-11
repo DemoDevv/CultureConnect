@@ -8,6 +8,16 @@ routes.route("/museums").get(async (req, res) => {
 });
 
 routes.route("/museums/:museofile").get(async (req, res) => {
+  /*
+  #swagger.tags = ['Museum']
+  #swagger.description = 'Endpoint to get a museum by its museofile'
+  #swagger.parameters['museofile'] = {
+    in: 'path',
+    description: 'Museofile of the museum',
+    required: true,
+    type: 'string'
+  }
+  */
   const museofile = decodeURIComponent(req.params.museofile);
   const museum = await museumController.findByMuseofile(museofile);
 

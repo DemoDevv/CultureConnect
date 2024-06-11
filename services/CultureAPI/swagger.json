@@ -5,7 +5,7 @@
     "description": "",
     "version": "1.0.0"
   },
-  "host": "localhost:8081/api/users",
+  "host": "localhost:8081/api/culture",
   "basePath": "/",
   "schemes": [
     "http",
@@ -24,13 +24,17 @@
     },
     "/museums/{museofile}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Museum"
+        ],
+        "description": "Endpoint to get a museum by its museofile",
         "parameters": [
           {
             "name": "museofile",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Museofile of the museum"
           }
         ],
         "responses": {
