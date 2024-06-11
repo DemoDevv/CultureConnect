@@ -1,4 +1,4 @@
-import { mongoose } from "mongoose";
+import mongoose from "mongoose";
 import { coordinatesSchema } from "./coordinatesDao.mjs";
 import Museum from "../models/museum.mjs";
 
@@ -33,7 +33,7 @@ const museumSchema = new mongoose.Schema({
   },
 });
 
-const MongoMuseum = new mongoose.model("museumCollection", museumSchema);
+const MongoMuseum = mongoose.model("museumCollection", museumSchema);
 
 const museumDao = {
   findAll: async () => {

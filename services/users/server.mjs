@@ -1,7 +1,10 @@
-import { mongoose } from "mongoose";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-const PORT = 8082;
-const mongoURL = "mongodb://0.0.0.0:27017";
+dotenv.config();
+
+const PORT = process.env.PORT || 8082;
+const mongoURL = "mongodb://localhost:27017";
 const mongoDB = "DB";
 
 await mongoose.connect(`${mongoURL}/${mongoDB}`);

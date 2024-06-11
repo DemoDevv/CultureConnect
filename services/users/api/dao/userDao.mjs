@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { hashPassword } from "../helpers/hash.mjs";
 
 const userSchema = new mongoose.Schema({
   pseudonyme: {
@@ -31,7 +32,10 @@ const userDao = {
   },
   createUser: async (user) => {
     try {
-      const mongoObject = new MongoUser({ ...user });
+      const mongoObject = new MongoUser({
+        password: hashPassword(user.password),
+        ...user,
+      });
 
       await mongoObject.save();
     } catch (e) {
