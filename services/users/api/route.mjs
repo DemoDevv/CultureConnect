@@ -3,11 +3,11 @@ import userController from "./controllers/userController.mjs";
 
 const routes = express.Router();
 
-routes.route("/register").post(async (req, res) => {
+routes.post("/register", async (req, res) => {
   /*
   #swagger.tags = ['User']
   #swagger.description = 'Endpoint to register a new user'
-  #swagger.parameters['newUser'] = {
+  #swagger.parameters['user'] = {
     in: 'body',
     description: 'User object',
     required: true,
@@ -16,15 +16,19 @@ routes.route("/register").post(async (req, res) => {
       email: 'jhondoe@test.fr',
       password: 'password'
     }
+  }
   */
-  const token = await userController.register(req.body.user);
+  try {
+    const token = await userController.register(req.body);
 
-  if (token == null) return res.sendStatus(400);
-
-  res.status(200).json({ token });
+    return res.status(200).json({ token });
+  } catch (e) {
+    console.error(e);
+    return res.sendStatus(400);
+  }
 });
 
-routes.route("/login").post(async (req, res) => {
+routes.post("/login", async (req, res) => {
   /*
   #swagger.tags = ['User']
   #swagger.description = 'Endpoint to login a user'
@@ -36,12 +40,16 @@ routes.route("/login").post(async (req, res) => {
       email: 'jhondoe@test.fr',
       password: 'password'
     }
+  }
   */
-  const token = await userController.login(req.body.user);
+  try {
+    const token = await userController.login(req.body);
 
-  if (token == null) return res.sendStatus(400);
-
-  res.status(200).json({ token });
+    return res.status(200).json({ token });
+  } catch (e) {
+    console.error(e);
+    return res.sendStatus(400);
+  }
 });
 
 export default routes;

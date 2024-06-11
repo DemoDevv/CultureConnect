@@ -20,13 +20,24 @@
         "description": "Endpoint to register a new user",
         "parameters": [
           {
-            "name": "body",
+            "name": "user",
             "in": "body",
+            "description": "User object",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "user": {
-                  "example": "any"
+                "pseudonyme": {
+                  "type": "string",
+                  "example": "JohnDoe"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "jhondoe@test.fr"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password"
                 }
               }
             }
@@ -50,13 +61,20 @@
         "description": "Endpoint to login a user",
         "parameters": [
           {
-            "name": "body",
+            "name": "user",
             "in": "body",
+            "description": "User object",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "user": {
-                  "example": "any"
+                "email": {
+                  "type": "string",
+                  "example": "jhondoe@test.fr"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password"
                 }
               }
             }

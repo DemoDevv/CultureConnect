@@ -33,8 +33,8 @@ const userDao = {
   createUser: async (user) => {
     try {
       const mongoObject = new MongoUser({
-        password: hashPassword(user.password),
         ...user,
+        password: hashPassword(user.password),
       });
 
       await mongoObject.save();
