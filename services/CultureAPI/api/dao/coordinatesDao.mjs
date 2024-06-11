@@ -1,4 +1,4 @@
-import { mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 const coordinatesSchema = new mongoose.Schema(
   {
@@ -11,7 +11,7 @@ const coordinatesSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { _id: false }
+  { _id: false },
 );
 
 export { coordinatesSchema };

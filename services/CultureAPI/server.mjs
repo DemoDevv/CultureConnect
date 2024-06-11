@@ -1,7 +1,9 @@
-import { mongoose } from "mongoose";
-import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-const PORT = 8081;
+dotenv.config();
+
+const PORT = process.env.PORT || 8081;
 const mongoURL = "mongodb://0.0.0.0:27017";
 const mongoDB = "DB";
 
