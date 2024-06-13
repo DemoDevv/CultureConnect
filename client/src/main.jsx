@@ -1,12 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+
+import "./index.css";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import Root from "./routes/root.jsx";
 import ErrorPage from "./error-page.jsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "./index.css";
+
 import Login from "./routes/auth/login.jsx";
 import Register from "./routes/auth/register.jsx";
 
+/*
+See the documentation for more information:
+https://reactrouter.com/en/main/start/tutorial
+*/
 const router = createBrowserRouter([
   {
     path: "/",
