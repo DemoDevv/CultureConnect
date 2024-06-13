@@ -3,14 +3,14 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const serverPort = process.env.PORT || 8081;
-const APIPATH = process.env.API_PATH || "/api/culture";
+const APIPATH = process.env.API_PATH || "/api/proxy";
 
 const outputFile = "./swagger.json";
 const endpointsFiles = ["./api/route.mjs"];
 
 const config = {
   info: {
-    title: "Culture API Documentation",
+    title: "Proxy RATP API Documentation",
     description: "",
   },
   tags: [],
