@@ -1,0 +1,51 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "User API Documentation",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8081/api/culture",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/museums": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/museums/{museofile}": {
+      "get": {
+        "tags": [
+          "Museum"
+        ],
+        "description": "Endpoint to get a museum by its museofile",
+        "parameters": [
+          {
+            "name": "museofile",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Museofile of the museum"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  }
+}
