@@ -9,7 +9,10 @@ const app = express();
 
 app.use(express.json());
 
-const corsOptions = {};
+const corsOptions = {
+  origin: "http://localhost:8081",
+  optionsSuccessStatus: 200,
+};
 app.use(cors(corsOptions));
 
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerJson));
