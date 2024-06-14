@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8083;
 const mongoURL = "mongodb://0.0.0.0:27017";
 const mongoDB = "DB";
 
