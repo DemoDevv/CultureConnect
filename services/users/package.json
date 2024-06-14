@@ -5,7 +5,7 @@
   "main": "app.mjs",
   "scripts": {
     "start": "node server.mjs",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "c8 nyc mocha --timeout 10000 --cahe off --exit",
     "start-gendoc": "node swagger-autogen.mjs"
   },
   "author": "",
