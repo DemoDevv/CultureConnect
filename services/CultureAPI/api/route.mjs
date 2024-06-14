@@ -1,8 +1,39 @@
 import express, { Router } from "express";
 import museumController from "./controllers/museumController.mjs";
 import artworkController from "./controllers/artworkController.mjs";
+import authController from "./controllers/authController.mjs";
 
 const routes = express.Router();
+
+routes.post("/register", async (req, res) => {
+  /*
+  #swagger.tags = ['Auth']
+  #swagger.description = 'Proxy Endpoint to register a new user'
+  */
+  try {
+    const token = await authController.register(req.body);
+
+    return res.status(200).json({ token });
+  } catch (e) {
+    console.error(e);
+    return res.sendStatus(400);
+  }
+});
+
+routes.post("/login", async (req, res) => {
+  /*
+  #swagger.tags = ['Auth']
+  #swagger.description = 'Proxy Endpoint to login a user'
+  */
+  try {
+    const token = await authController.login(req.body);
+
+    return res.status(200).json({ token });
+  } catch (e) {
+    console.error(e);
+    return res.sendStatus(400);
+  }
+});
 
 routes.route("/museums").get(async (req, res) => {
   res.status(200).send("Hello world !");

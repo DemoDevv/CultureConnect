@@ -5,7 +5,6 @@ import { generateAccessToken } from "../helpers/jwt.mjs";
 const userController = {
   register: async (user) => {
     if (await userDao.findUserByEmail(user.email)) {
-      console.log(await userDao.findUserByEmail(user.email));
       return Promise.reject("User already exists");
     }
 
