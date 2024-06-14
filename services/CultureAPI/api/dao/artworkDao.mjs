@@ -64,6 +64,13 @@ const artworkDao = {
       id,
     });
   },
+  getByMuseofile: async (museofile, page = 1) => {
+    const data = await MongoArtwork.find({
+      id_museum: museofile,
+    })
+      .skip((page - 1) * itemsPerPage)
+      .limit(itemsPerPage);
+  },
 };
 
 export { artworkSchema, artworkDao };
