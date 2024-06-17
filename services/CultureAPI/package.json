@@ -19,6 +19,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mocha": "^10.4.0",
+    "mongodb-memory-server": "^9.3.0",
     "mongoose": "^8.4.1",
     "nyc": "^17.0.0",
     "supertest": "^7.0.0",
