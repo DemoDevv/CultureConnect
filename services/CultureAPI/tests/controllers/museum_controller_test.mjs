@@ -33,8 +33,8 @@ const artwork1 = new Artwork({
 const { museumDao } = await import("../../api/dao/museumDao.mjs");
 const { artworkDao } = await import("../../api/dao/artworkDao.mjs");
 
-describe("GET api/culture/museums", function () {
-  before(async () => {
+describe("api/culture/museums", function () {
+  before(async function () {
     await mongoose.connection.close();
     const { MongoMemoryServer } = await import("mongodb-memory-server");
     const mongoServer = await MongoMemoryServer.create();
@@ -43,23 +43,23 @@ describe("GET api/culture/museums", function () {
     await mongoose.connect(uri);
   });
 
-  beforeEach(async () => {
+  beforeEach(async function () {
     await museumDao.removeAll();
     await artworkDao.removeAll();
   });
 
-  after(async () => {
+  after(async function () {
     await mongoose.connection.close();
   });
 
-  it("GET /", async () => {
+  it("GET /", async function () {
     const response = await requestWithSupertest.get("/api/culture/museums");
 
     expect(response.status).to.eql(200);
   });
 
-  describe("GET /:museofile", async () => {
-    it("with not found museum", async () => {
+  describe("GET /:museofile", async function () {
+    it("with not found museum", async function () {
       const response = await requestWithSupertest.get(
         "/api/culture/museums/M1"
       );
@@ -67,7 +67,7 @@ describe("GET api/culture/museums", function () {
       expect(response.status).to.eql(404);
     });
 
-    it("with found museum", async () => {
+    it("with found museum", async function () {
       await museumDao.add(museum1);
 
       const response = await requestWithSupertest.get(
@@ -79,8 +79,8 @@ describe("GET api/culture/museums", function () {
     });
   });
 
-  describe("GET /:museofile/artworks", async () => {
-    it("with no museum", async () => {
+  describe("GET /:museofile/artworks", async function () {
+    it("with no museum", async function () {
       const response = await requestWithSupertest.get(
         "/api/culture/museums/artworks/M1"
       );
@@ -89,7 +89,7 @@ describe("GET api/culture/museums", function () {
       expect(response.body).to.be.deep.equal([]);
     });
 
-    it("with not found museum", async () => {
+    it("with not found museum", async function () {
       await museumDao.add(museum1);
       await artworkDao.add(artwork1);
 
@@ -101,7 +101,7 @@ describe("GET api/culture/museums", function () {
       expect(response.body).to.eql([]);
     });
 
-    it("with found museum", async () => {
+    it("with found museum", async function () {
       await museumDao.add(museum1);
       await artworkDao.add(artwork1);
 

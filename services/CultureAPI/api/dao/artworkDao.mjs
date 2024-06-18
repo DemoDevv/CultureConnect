@@ -60,9 +60,11 @@ const artworkDao = {
     await MongoArtwork.deleteMany({});
   },
   getById: async (id) => {
-    return await MongoArtwork.findOne({
-      id: id,
-    });
+    try {
+      return await MongoArtwork.findById(id);
+    } catch (e) {
+      return null;
+    }
   },
   getByMuseofile: async (museofile, page = 1) => {
     const data = await MongoArtwork.find({
