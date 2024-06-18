@@ -15,14 +15,6 @@ export default class Artwork {
     this.size = obj.size;
   }
 
-  isValid() {
-    return (
-      this.id_museum?.length > 0 &&
-      thisid_museum !== "manquant" &&
-      this.name?.length > 0
-    );
-  }
-
   static fromCsvData(data) {
     let museofile = data["code_museofile"];
 

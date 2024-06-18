@@ -61,7 +61,7 @@ const artworkDao = {
   },
   getById: async (id) => {
     return await MongoArtwork.findOne({
-      id,
+      id: id,
     });
   },
   getByMuseofile: async (museofile, page = 1) => {

@@ -35,6 +35,7 @@ routes.post("/login", async (req, res) => {
   }
 });
 
+//  Museums
 routes.route("/museums").get(async (req, res) => {
   res.status(200).send("Hello world !");
 });
@@ -59,7 +60,7 @@ routes.route("/museums/:museofile").get(async (req, res) => {
   res.status(200).send(museum);
 });
 
-routes.route("/museums/:museofile/artworks").get(async (req, res) => {
+routes.route("/museums/artworks/:museofile").get(async (req, res) => {
   /*
   #swagger.tags = ['Museum']
   #swagger.description = 'Endpoint to get the artworks of a museum'
@@ -80,9 +81,12 @@ routes.route("/museums/:museofile/artworks").get(async (req, res) => {
   const page = getPage(req.params);
   const museofile = decodeURIComponent(req.params.museofile);
 
-  res.status(200).send(await artworkController.findByMuseofile(museofile));
+  res
+    .status(200)
+    .send(await artworkController.findByMuseofile(museofile, page));
 });
 
+//  Artworks
 routes.route("/artworks/:id").get(async (req, res) => {
   /*
   #swagger.tags = ['Artwork']
