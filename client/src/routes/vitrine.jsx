@@ -3,7 +3,7 @@ import Artwork from "../components/Artwork";
 import Footer from "../components/Footer";
 import NavigationBar from "../components/NavigationBar";
 
-export default function Root() {
+export default function Vitrine() {
   return (
     <>
       <NavigationBar />

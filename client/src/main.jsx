@@ -5,7 +5,7 @@ import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Root from "./routes/root.jsx";
+import Vitrine from "./routes/vitrine.jsx";
 import ErrorPage from "./error-page.jsx";
 
 import Login from "./routes/auth/login.jsx";
@@ -19,7 +19,7 @@ https://reactrouter.com/en/main/start/tutorial
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <Vitrine />,
     errorElement: <ErrorPage />,
   },
   {
