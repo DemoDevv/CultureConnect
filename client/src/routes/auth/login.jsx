@@ -3,9 +3,13 @@ import { useState } from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 
+import { useAuth } from "../../components/AuthProvider";
+
 export default function Login() {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
+
+  const { setToken } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,8 +24,8 @@ export default function Login() {
 
     if (!data.ok) return;
 
-    // TODO: handle the token
-    console.log(await data.json());
+    const { token } = await data.json();
+    setToken(token.token);
   };
 
   return (

@@ -1,4 +1,4 @@
-import express, { Router } from "express";
+import express from "express";
 import museumController from "./controllers/museumController.mjs";
 import artworkController from "./controllers/artworkController.mjs";
 import authController from "./controllers/authController.mjs";

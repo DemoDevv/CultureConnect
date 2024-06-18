@@ -5,10 +5,14 @@ import constants from "../../constants/api";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 
+import { useAuth } from "../../components/AuthProvider";
+
 export default function Register() {
   let [pseudonyme, setPseudonyme] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
+
+  const { setToken } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,8 +27,8 @@ export default function Register() {
 
     if (!data.ok) return;
 
-    // TODO: handle the token
-    console.log(await data.json());
+    const { token } = await data.json();
+    setToken(token.token);
   };
 
   return (

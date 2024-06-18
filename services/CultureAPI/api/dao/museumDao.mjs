@@ -37,7 +37,7 @@ const museumSchema = new mongoose.Schema({
 const MongoMuseum = mongoose.model("museumCollection", museumSchema);
 
 const museumDao = {
-  findAll: async (data = 1) => {
+  findAll: async (page = 1) => {
     const data = await MongoMuseum.find({})
       .skip((page - 1) * itemsPerPage)
       .limit(itemsPerPage);

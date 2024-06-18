@@ -10,6 +10,7 @@ import ErrorPage from "./error-page.jsx";
 
 import Login from "./routes/auth/login.jsx";
 import Register from "./routes/auth/register.jsx";
+import { AuthProvider } from "./components/AuthProvider.jsx";
 
 /*
 See the documentation for more information:
@@ -33,6 +34,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 );

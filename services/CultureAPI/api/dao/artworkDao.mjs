@@ -70,6 +70,8 @@ const artworkDao = {
     })
       .skip((page - 1) * itemsPerPage)
       .limit(itemsPerPage);
+
+    return data;
   },
 };
 
