@@ -12,6 +12,8 @@ import Login from "./routes/auth/login.jsx";
 import Register from "./routes/auth/register.jsx";
 import { AuthProvider } from "./components/AuthProvider.jsx";
 
+import Home from "./routes/home.jsx";
+
 /*
 See the documentation for more information:
 https://reactrouter.com/en/main/start/tutorial
@@ -25,10 +27,17 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/register",
     element: <Register />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/home",
+    element: <Home />,
+    errorElement: <ErrorPage />,
   },
 ]);
 
