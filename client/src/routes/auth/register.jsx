@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import constants from "../../constants/api";
 
 import Button from "../../components/Button";
@@ -13,6 +15,7 @@ export default function Register() {
   let [password, setPassword] = useState("");
 
   const { setToken } = useAuth();
+  let navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,6 +32,8 @@ export default function Register() {
 
     const { token } = await data.json();
     setToken(token.token);
+
+    navigate("/home");
   };
 
   return (
