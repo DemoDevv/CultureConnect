@@ -20,6 +20,8 @@ const userController = {
       return Promise.reject("Invalid credentials");
     }
 
+    console.log(user.password, foundUser.password);
+
     const token = generateAccessToken(user);
     return token;
   },

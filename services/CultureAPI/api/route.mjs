@@ -57,7 +57,7 @@ routes.route("/museums/:museofile").get(async (req, res) => {
   if (!museum)
     return res.status(404).send({ message: "Could not find museum" });
 
-  res.status(200).send(museum);
+  return res.status(200).send(museum);
 });
 
 routes.route("/museums/artworks/:museofile").get(async (req, res) => {
@@ -81,9 +81,9 @@ routes.route("/museums/artworks/:museofile").get(async (req, res) => {
   const page = getPage(req.params);
   const museofile = decodeURIComponent(req.params.museofile);
 
-  res
-    .status(200)
-    .send(await artworkController.findByMuseofile(museofile, page));
+  const result = await artworkController.findByMuseofile(museofile, page);
+
+  return res.status(200).send(result);
 });
 
 //  Artworks
@@ -110,6 +110,8 @@ routes.route("/artworks/:id").get(async (req, res) => {
 
 function getPage(parameters) {
   const page = decodeURIComponent(parameters.page);
+
+  //  TODO check si c'est un int
 
   return +page > 0 ? page : 1;
 }

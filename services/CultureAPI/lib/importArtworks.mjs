@@ -40,6 +40,12 @@ fs.createReadStream(filePath)
     console.log(`Artwork import done ! Added ${results.length} artworks`);
   });
 
+//  Permet de valider un code muséofile
+//  Parfois le fichier CSV donne des codes muséofiles sans le préfixe M, auquel cas on l'ajoute si possible
+//  Ou encore parfois le code muséofile est précédé d'un texte autre, auquel cas on supprime le texte en surplus
+//  Retourne null si le code muséofile n'est pas valide
+//
+//  Afin de valider le maximum de code museofile
 function validateMuseofile(museofile) {
   museofile = museofile.toUpperCase().trim();
   museofile = museofile.length > 5 ? museofile.slice(0, 5) : museofile;
