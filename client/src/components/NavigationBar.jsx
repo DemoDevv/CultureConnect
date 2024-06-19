@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function NavigationBar({}) {
   const { token } = useAuth();
-  let [isAuthenticated, setIsAuthenticated] = useState(token !== null);
+  let [isAuthenticated, _] = useState(token !== null);
 
   return (
     <nav className="flex justify-center items-center h-[100px]">
