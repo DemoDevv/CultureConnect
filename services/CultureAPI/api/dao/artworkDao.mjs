@@ -44,7 +44,6 @@ const artworkDao = {
 
       await mongoObject.save();
     } catch (e) {
-      console.error(e);
       return Promise.reject("Not a valid artwork");
     }
   },
