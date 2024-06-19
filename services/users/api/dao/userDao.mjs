@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   favoris: {
-    type: Map,
+    type: [String],
     of: String,
     required: false,
   },
@@ -50,6 +50,45 @@ const userDao = {
       console.error(e);
       return Promise.reject("Not a valid user");
     }
+  },
+  getFavorites: async (email) => {
+    const user = await MongoUser.findOne({
+      email,
+    });
+
+    if (!user) return Promise.reject("User not found");
+
+    return user.favoris;
+  },
+  addFavorite: async (email, artwork_id) => {
+    const user = await MongoUser.findOne({
+      email,
+    });
+
+    if (!user) return Promise.reject("User not found");
+
+    if (user.favoris.includes(artwork_id)) {
+      return Promise.reject("Artwork already added to favorites");
+    }
+
+    user.favoris.push(artwork_id);
+
+    await user.save();
+  },
+  removeFavorite: async (email, artwork_id) => {
+    const user = await MongoUser.findOne({
+      email,
+    });
+
+    if (!user) return Promise.reject("User not found");
+
+    if (!user.favoris.includes(artwork_id)) {
+      return Promise.reject("Artwork not in your favorites");
+    }
+
+    user.favoris = user.favoris.filter((f) => f !== artwork_id);
+
+    await user.save();
   },
 };
 

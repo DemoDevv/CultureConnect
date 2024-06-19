@@ -20,14 +20,14 @@ const userController = {
       return Promise.reject("Invalid credentials");
     }
 
-    console.log(user.password, foundUser.password);
-
     const token = generateAccessToken(user);
     return token;
   },
-  addFavorite: async () => {
-    // TODO
-  },
+  favorites: async (email) => await userDao.getFavorites(email),
+  addFavorite: async (email, artwork_id) =>
+    await userDao.addFavorite(email, artwork_id),
+  removeFavorite: async (email, artwork_id) =>
+    await userDao.removeFavorite(email, artwork_id),
 };
 
 export default userController;
