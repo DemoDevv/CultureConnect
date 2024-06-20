@@ -57,46 +57,38 @@ routes.get("/favorites", authenticateToken, async (req, res) => {
   return res.status(200).json(await userDao.getFavorites(req.user.email));
 });
 
-routes.put(
-  "/favorites/add/:artwork_id",
-  authenticateToken,
-  async (req, res) => {
-    const artwork_id = decodeURIComponent(req.params.artwork_id);
+routes.put("/favorites/:artwork_id", authenticateToken, async (req, res) => {
+  const artwork_id = decodeURIComponent(req.params.artwork_id);
 
-    if (!artwork_id) {
-      return res.sendStatus(400);
-    }
-
-    try {
-      await userController.addFavorite(req.user.email, artwork_id);
-    } catch (e) {
-      console.error(e);
-      return res.sendStatus(400);
-    }
-
-    return res.sendStatus(200);
+  if (!artwork_id) {
+    return res.sendStatus(400);
   }
-);
 
-routes.delete(
-  "/favorites/remove/:artwork_id",
-  authenticateToken,
-  async (req, res) => {
-    const artwork_id = decodeURIComponent(req.params.artwork_id);
-
-    if (!artwork_id) {
-      return res.sendStatus(400);
-    }
-
-    try {
-      await userController.removeFavorite(req.user.email, artwork_id);
-    } catch (e) {
-      console.error(e);
-      return res.sendStatus(400);
-    }
-
-    return res.sendStatus(200);
+  try {
+    await userController.addFavorite(req.user.email, artwork_id);
+  } catch (e) {
+    console.error(e);
+    return res.sendStatus(400);
   }
-);
+
+  return res.sendStatus(200);
+});
+
+routes.delete("/favorites/:artwork_id", authenticateToken, async (req, res) => {
+  const artwork_id = decodeURIComponent(req.params.artwork_id);
+
+  if (!artwork_id) {
+    return res.sendStatus(400);
+  }
+
+  try {
+    await userController.removeFavorite(req.user.email, artwork_id);
+  } catch (e) {
+    console.error(e);
+    return res.sendStatus(400);
+  }
+
+  return res.sendStatus(200);
+});
 
 export default routes;
