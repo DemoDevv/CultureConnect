@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { hashPassword } from "../helpers/hash.mjs";
+import User from "../models/user.mjs";
 
 const userSchema = new mongoose.Schema({
   pseudonyme: {
@@ -24,8 +25,18 @@ const userSchema = new mongoose.Schema({
 const MongoUser = mongoose.model("userCollection", userSchema);
 
 const userDao = {
+  removeAll: async () => {
+    await MongoUser.deleteMany({});
+  },
+  findAll: async () => {
+    return await MongoUser.find({});
+  },
   findUserById: async (id) => {
-    return await MongoUser.findById(id).exec();
+    try {
+      return await MongoUser.findById(id).exec();
+    } catch (e) {
+      return null;
+    }
   },
   findUserByEmail: async (email) => {
     return await MongoUser.findOne({ email: email }).exec();
