@@ -32,6 +32,21 @@ describe("User DAO", function () {
       }
     });
 
+    it("invalid email", async function () {
+      const user = new User({
+        id: 1,
+        pseudonyme: "User1",
+        email: "user1@example",
+        password: "testing",
+      });
+
+      try {
+        await userDao.createUser(user);
+      } catch (e) {
+        expect(e).to.be.equal("Not a valid user");
+      }
+    });
+
     it("valid user", async function () {
       const user = new User({
         id: 1,

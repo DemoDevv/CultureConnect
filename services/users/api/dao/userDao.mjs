@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { hashPassword } from "../helpers/hash.mjs";
 import User from "../models/user.mjs";
+import validator from "validator";
 
 const userSchema = new mongoose.Schema({
   pseudonyme: {
@@ -10,6 +11,11 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    validate: {
+      validator: validator.isEmail,
+      message: "Please enter a valid email",
+      isAsync: false,
+    },
   },
   password: {
     type: String,
