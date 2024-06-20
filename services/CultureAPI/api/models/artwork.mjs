@@ -15,24 +15,17 @@ export default class Artwork {
     this.size = obj.size;
   }
 
-  isValid() {
-    return (
-      this.id_museum?.length > 0 &&
-      thisid_museum !== "manquant" &&
-      this.name?.length > 0
-    );
-  }
-
   static fromCsvData(data) {
     let museofile = data["code_museofile"];
 
-    //  Parfois, le code museofile est = à 'manquant'
-    //  On invalide donc l'objet artwork en mettant une string vide
-    if (museofile?.length === 0 || museofile === "manquant") museofile = "";
+    // //  Parfois, le code museofile est = à 'manquant'
+    // //  On invalide donc l'objet artwork en mettant une string vide
+    if (museofile?.length === 0 || museofile === "manquant")
+      museofile = data["nom_officiel_musee"];
 
     return new Artwork({
       id: 0,
-      id_museum: museofile,
+      id_museum: data["code_museofile"],
       name: data["titre"],
       author: data["auteur"],
       type: data["domaine"],

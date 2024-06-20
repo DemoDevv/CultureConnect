@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import { hashPassword } from "../helpers/hash.mjs";
+import User from "../models/user.mjs";
+import validator from "validator";
 
 const userSchema = new mongoose.Schema({
   pseudonyme: {
@@ -9,13 +11,18 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    validate: {
+      validator: validator.isEmail,
+      message: "Please enter a valid email",
+      isAsync: false,
+    },
   },
   password: {
     type: String,
     required: true,
   },
   favoris: {
-    type: Map,
+    type: [String],
     of: String,
     required: false,
   },
@@ -24,8 +31,18 @@ const userSchema = new mongoose.Schema({
 const MongoUser = mongoose.model("userCollection", userSchema);
 
 const userDao = {
+  removeAll: async () => {
+    await MongoUser.deleteMany({});
+  },
+  findAll: async () => {
+    return await MongoUser.find({});
+  },
   findUserById: async (id) => {
-    return await MongoUser.findById(id).exec();
+    try {
+      return await MongoUser.findById(id).exec();
+    } catch (e) {
+      return null;
+    }
   },
   findUserByEmail: async (email) => {
     return await MongoUser.findOne({ email: email }).exec();
@@ -50,6 +67,45 @@ const userDao = {
       console.error(e);
       return Promise.reject("Not a valid user");
     }
+  },
+  getFavorites: async (email) => {
+    const user = await MongoUser.findOne({
+      email,
+    });
+
+    if (!user) return Promise.reject("User not found");
+
+    return user.favoris;
+  },
+  addFavorite: async (email, artwork_id) => {
+    const user = await MongoUser.findOne({
+      email,
+    });
+
+    if (!user) return Promise.reject("User not found");
+
+    if (user.favoris.includes(artwork_id)) {
+      return Promise.reject("Artwork already added to favorites");
+    }
+
+    user.favoris.push(artwork_id);
+
+    await user.save();
+  },
+  removeFavorite: async (email, artwork_id) => {
+    const user = await MongoUser.findOne({
+      email,
+    });
+
+    if (!user) return Promise.reject("User not found");
+
+    if (!user.favoris.includes(artwork_id)) {
+      return Promise.reject("Artwork not in your favorites");
+    }
+
+    user.favoris = user.favoris.filter((f) => f !== artwork_id);
+
+    await user.save();
   },
 };
 

@@ -44,7 +44,6 @@ const artworkDao = {
 
       await mongoObject.save();
     } catch (e) {
-      console.error(e);
       return Promise.reject("Not a valid artwork");
     }
   },
@@ -60,9 +59,11 @@ const artworkDao = {
     await MongoArtwork.deleteMany({});
   },
   getById: async (id) => {
-    return await MongoArtwork.findOne({
-      id,
-    });
+    try {
+      return await MongoArtwork.findById(id);
+    } catch (e) {
+      return null;
+    }
   },
   getByMuseofile: async (museofile, page = 1) => {
     const data = await MongoArtwork.find({
@@ -70,6 +71,8 @@ const artworkDao = {
     })
       .skip((page - 1) * itemsPerPage)
       .limit(itemsPerPage);
+
+    return data;
   },
 };
 

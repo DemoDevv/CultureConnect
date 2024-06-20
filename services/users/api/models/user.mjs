@@ -8,12 +8,14 @@
  * @property {Array<number>} favoris - The list of the ids of the museums and artworks that the user has liked
  */
 export default class User {
+  id;
   pseudonyme;
   email;
   password;
   favoris;
 
   constructor(obj) {
+    this.id = obj.id;
     this.pseudonyme = obj.pseudonyme;
     this.email = obj.email;
     this.password = obj.password;

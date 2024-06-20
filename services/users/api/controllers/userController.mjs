@@ -5,7 +5,6 @@ import { generateAccessToken } from "../helpers/jwt.mjs";
 const userController = {
   register: async (user) => {
     if (await userDao.findUserByEmail(user.email)) {
-      console.log(await userDao.findUserByEmail(user.email));
       return Promise.reject("User already exists");
     }
 
@@ -24,9 +23,11 @@ const userController = {
     const token = generateAccessToken(user);
     return token;
   },
-  addFavorite: async () => {
-    // TODO
-  },
+  favorites: async (email) => await userDao.getFavorites(email),
+  addFavorite: async (email, artwork_id) =>
+    await userDao.addFavorite(email, artwork_id),
+  removeFavorite: async (email, artwork_id) =>
+    await userDao.removeFavorite(email, artwork_id),
 };
 
 export default userController;
