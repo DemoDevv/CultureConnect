@@ -1,21 +1,23 @@
 import { Link } from "react-router-dom";
 
 import { useAuth } from "./AuthProvider";
-import { useState } from "react";
+import { useRef } from "react";
 
 export default function NavigationBar({}) {
   const { token } = useAuth();
-  let [isAuthenticated, _] = useState(token !== null);
+  const isAuthenticated = useRef(token !== null);
 
   return (
     <nav className="flex justify-center items-center h-[100px]">
       <div className="flex justify-between items-center w-3/5 h-1/2 bg-white rounded-[12px] px-5">
-        <span>Culture Connect</span>
+        <Link to={`/`}>Culture Connect</Link>
         <div className="flex justify-between gap-5">
-          {isAuthenticated ? (
+          {isAuthenticated.current ? (
             <>
-              <Link to={`/`}>Accueil</Link>
               {/* add favoris */}
+              <Link to={`/`} className="text-[#B91C1B]">
+                Favoris
+              </Link>
             </>
           ) : (
             <>
