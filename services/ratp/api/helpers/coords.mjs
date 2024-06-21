@@ -4,10 +4,8 @@ function degreesToRadians(degrees) {
 
 /**
 function for calculating the distance between two points on the earth
-@param {number} lat1 - latitude of the first point
-@param {number} lon1 - longitude of the first point
-@param {number} lat2 - latitude of the second point
-@param {number} lon2 - longitude of the second point
+@param {object} coords1 - object with lat and lon properties of the first point
+@param {object} coords2 - object with lat and lon properties of the second point
 @return {number} - distance between the two points in kilometers
 source: https://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates
 */
