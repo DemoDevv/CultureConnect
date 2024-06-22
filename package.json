@@ -1,0 +1,14 @@
+{
+	"name": "cultureconnect",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"format": "npx @biomejs/biome format --write"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@biomejs/biome": "1.8.2"
+	}
+}

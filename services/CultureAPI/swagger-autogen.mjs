@@ -9,6 +9,7 @@ const outputFile = "./swagger.json";
 const endpointsFiles = ["./api/route.mjs"];
 
 const config = {
+<<<<<<< Updated upstream
   info: {
     title: "User API Documentation",
     description: "",
@@ -16,6 +17,15 @@ const config = {
   tags: [],
   host: "localhost:" + serverPort + APIPATH,
   schemes: ["http", "https"],
+=======
+	info: {
+		title: "Culture API Documentation",
+		description: "",
+	},
+	tags: [],
+	host: "localhost:" + serverPort + APIPATH,
+	schemes: ["http", "https"],
+>>>>>>> Stashed changes
 };
 
 swaggerAutogen(outputFile, endpointsFiles, config);

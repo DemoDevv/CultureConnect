@@ -10,7 +10,7 @@ const saltRounds = 10;
   * @return {string} the hashed password
 */
 function hashPassword(password) {
-  return bcrypt.hashSync(password, saltRounds);
+	return bcrypt.hashSync(password, saltRounds);
 }
 
 /**
@@ -21,7 +21,7 @@ function hashPassword(password) {
   * @return {boolean} true if the password matches the hash, false otherwise
 */
 function comparePassword(password, hash) {
-  return bcrypt.compareSync(password, hash);
+	return bcrypt.compareSync(password, hash);
 }
 
 export { hashPassword, comparePassword };

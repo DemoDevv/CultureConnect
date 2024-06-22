@@ -13,13 +13,13 @@ const AuthContext = createContext();
     * @param {React.ReactNode} props.children
 */
 export function AuthProvider({ children }) {
-  let [token, setToken] = useState(null);
+	let [token, setToken] = useState(null);
 
-  return (
-    <AuthContext.Provider value={{ token, setToken }}>
-      {children}
-    </AuthContext.Provider>
-  );
+	return (
+		<AuthContext.Provider value={{ token, setToken }}>
+			{children}
+		</AuthContext.Provider>
+	);
 }
 
 /**

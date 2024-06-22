@@ -1,0 +1,23 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"title": "Proxy RATP API Documentation",
+		"description": "",
+		"version": "1.0.0"
+	},
+	"host": "localhost:8083/api/proxy_ratp",
+	"basePath": "/",
+	"schemes": ["http", "https"],
+	"paths": {
+		"/": {
+			"get": {
+				"description": "",
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		}
+	}
+}
