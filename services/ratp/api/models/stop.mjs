@@ -18,15 +18,15 @@ export default class Stop {
 	static fromCsvData(data) {
 		const [lat, lon] = data["ArRGeopoint"].split(",");
 
-    return new Stop({
-      id: 0,
-      type: data["ArRType"],
-      name: data["ArRName"],
-      coordinates: new Coordinates({
-        longitude: lon,
-        latitude: lat,
-      }),
-      city: data["ArRTown"].toLowerCase(),
-    });
-  }
+		return new Stop({
+			id: 0,
+			type: data["ArRType"],
+			name: data["ArRName"],
+			coordinates: new Coordinates({
+				longitude: lon,
+				latitude: lat,
+			}),
+			city: data["ArRTown"].toLowerCase(),
+		});
+	}
 }

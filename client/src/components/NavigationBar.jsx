@@ -10,7 +10,9 @@ export default function NavigationBar({}) {
 	return (
 		<nav className="flex justify-center items-center h-[100px]">
 			<div className="flex justify-between items-center w-3/5 h-1/2 bg-white rounded-[12px] px-5">
-				<Link to={`/`}>Culture Connect</Link>
+				<Link to={`/`} className="tracking-wide">
+					Culture Connect
+				</Link>
 				<div className="flex justify-between gap-5">
 					{isAuthenticated.current ? (
 						<>

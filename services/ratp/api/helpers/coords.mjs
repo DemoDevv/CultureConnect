@@ -1,5 +1,5 @@
 function degreesToRadians(degrees) {
-  return (degrees * Math.PI) / 180;
+	return (degrees * Math.PI) / 180;
 }
 
 /**
@@ -10,17 +10,17 @@ function for calculating the distance between two points on the earth
 source: https://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates
 */
 export function distanceInKmBetweenEarthCoordinates(coords1, coords2) {
-  const earthRadiusKm = 6371;
+	const earthRadiusKm = 6371;
 
-  const dLat = degreesToRadians(coords2.latitude - coords1.latitude);
-  const dLon = degreesToRadians(coords2.longitude - coords1.longitude);
+	const dLat = degreesToRadians(coords2.latitude - coords1.latitude);
+	const dLon = degreesToRadians(coords2.longitude - coords1.longitude);
 
-  const lat1 = degreesToRadians(coords1.latitude);
-  const lat2 = degreesToRadians(coords2.latitude);
+	const lat1 = degreesToRadians(coords1.latitude);
+	const lat2 = degreesToRadians(coords2.latitude);
 
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return earthRadiusKm * c;
+	const a =
+		Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+		Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+	const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+	return earthRadiusKm * c;
 }

@@ -14,21 +14,21 @@ console.log(`Connected mongo on ${mongoURL}/${mongoDB}`);
 const results = [];
 
 fs.createReadStream(filePath)
-  .pipe(csv())
-  .on("data", (data) => {
-    const museum = Museum.fromCsvData(data);
+	.pipe(csv())
+	.on("data", (data) => {
+		const museum = Museum.fromCsvData(data);
 
-    if (!museum.isInIleDeFrance()) return;
+		if (!museum.isInIleDeFrance()) return;
 
-    results.push(museum);
-  })
-  .on("error", console.error)
-  .on("end", async () => {
-    const { museumDao } = await import("../api/dao/museumDao.mjs");
+		results.push(museum);
+	})
+	.on("error", console.error)
+	.on("end", async () => {
+		const { museumDao } = await import("../api/dao/museumDao.mjs");
 
-    await museumDao.removeAll();
-    await museumDao.addMany(results);
+		await museumDao.removeAll();
+		await museumDao.addMany(results);
 
-    console.log("Museum import done !");
-    exit(0);
-  });
+		console.log("Museum import done !");
+		exit(0);
+	});
