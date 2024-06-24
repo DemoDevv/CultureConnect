@@ -9,12 +9,12 @@ import { useAuth } from "./AuthProvider";
  * @param {React.ReactNode} props.children
  */
 export default function RequireAuth({ children }) {
-  const { token } = useAuth();
-  const { location } = useLocation();
+	const { token } = useAuth();
+	const { location } = useLocation();
 
-  if (!token) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
+	if (!token) {
+		return <Navigate to="/login" state={{ from: location }} replace />;
+	}
 
-  return children;
+	return children;
 }

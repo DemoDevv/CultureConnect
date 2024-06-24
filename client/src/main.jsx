@@ -4,11 +4,11 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 
 import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-  Routes,
+	createBrowserRouter,
+	createRoutesFromElements,
+	Route,
+	RouterProvider,
+	Routes,
 } from "react-router-dom";
 
 import Vitrine from "./routes/vitrine.jsx";
@@ -26,32 +26,32 @@ See the documentation for more information:
 https://reactrouter.com/en/main/start/tutorial
 */
 const router = createBrowserRouter(
-  createRoutesFromElements(
-    <>
-      <Route path="/" element={<Vitrine />} errorElement={<ErrorPage />} />
-      <Route path="/login" element={<Login />} errorElement={<ErrorPage />} />
-      <Route
-        path="/register"
-        element={<Register />}
-        errorElement={<ErrorPage />}
-      />
-      <Route
-        path="home"
-        element={
-          <RequireAuth>
-            <Home />
-          </RequireAuth>
-        }
-        errorElement={<ErrorPage />}
-      />
-    </>,
-  ),
+	createRoutesFromElements(
+		<>
+			<Route path="/" element={<Vitrine />} errorElement={<ErrorPage />} />
+			<Route path="/login" element={<Login />} errorElement={<ErrorPage />} />
+			<Route
+				path="/register"
+				element={<Register />}
+				errorElement={<ErrorPage />}
+			/>
+			<Route
+				path="home"
+				element={
+					<RequireAuth>
+						<Home />
+					</RequireAuth>
+				}
+				errorElement={<ErrorPage />}
+			/>
+		</>,
+	),
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
-  </React.StrictMode>,
+	<React.StrictMode>
+		<AuthProvider>
+			<RouterProvider router={router} />
+		</AuthProvider>
+	</React.StrictMode>,
 );

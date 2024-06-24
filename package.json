@@ -1,0 +1,19 @@
+{
+	"name": "cultureconnect",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"format": "npx @biomejs/biome format --write",
+		"client": "cd client && npm run dev",
+		"users": "cd services/users && npm start",
+		"cultureapi": "cd services/CultureAPI && npm start",
+		"all": "concurrently \"npm run client\" \"npm run users\" \"npm run cultureapi\""
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@biomejs/biome": "1.8.2",
+		"concurrently": "^8.2.2"
+	}
+}
