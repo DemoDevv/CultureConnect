@@ -31,8 +31,12 @@ fs.createReadStream(filePath)
   .on("error", console.error)
   .on("end", async () => {
     console.log(`Stops import done ! Added ${results.length} stops`);
-    stopDao.removeAll();
-    stopDao.addMany(results);
+    try {
+      await stopDao.removeAll();
+      await stopDao.addMany(results);
+    } catch (e) {
+      console.error(e);
+    }
 
 		await mongoose.connection.close();
 	});

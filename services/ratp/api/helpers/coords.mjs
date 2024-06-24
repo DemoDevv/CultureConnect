@@ -12,11 +12,11 @@ source: https://stackoverflow.com/questions/365826/calculate-distance-between-2-
 export function distanceInKmBetweenEarthCoordinates(coords1, coords2) {
   const earthRadiusKm = 6371;
 
-  const dLat = degreesToRadians(coords2.lat - coords1.lat);
-  const dLon = degreesToRadians(coords2.lon - coords1.lon);
+  const dLat = degreesToRadians(coords2.latitude - coords1.latitude);
+  const dLon = degreesToRadians(coords2.longitude - coords1.longitude);
 
-  const lat1 = degreesToRadians(coords1.lat);
-  const lat2 = degreesToRadians(coords2.lat);
+  const lat1 = degreesToRadians(coords1.latitude);
+  const lat2 = degreesToRadians(coords2.latitude);
 
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +

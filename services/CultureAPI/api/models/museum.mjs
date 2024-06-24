@@ -1,4 +1,3 @@
-import { museumDao } from "../dao/museumDao.mjs";
 import Coordinates from "./coordinates.mjs";
 
 const idf_departments = [
@@ -37,16 +36,16 @@ export default class Museum {
 		return idf_departments.includes(this.department.toLowerCase());
 	}
 
-	static fromCsvData(data) {
-		return new Museum({
-			id: 0,
-			museofile: data["Identifiant Muséofile"],
-			name: data["Nom officiel du musée"],
-			coordinates: Coordinates.fromCsvData(data),
-			department: data["Département"],
-			address: data["Adresse"],
-			url: data["URL"],
-			city: data["Commune"],
-		});
-	}
+  static fromCsvData(data) {
+    return new Museum({
+      id: 0,
+      museofile: data["Identifiant Muséofile"],
+      name: data["Nom officiel du musée"],
+      coordinates: Coordinates.fromCsvData(data),
+      department: data["Département"],
+      address: data["Adresse"],
+      url: data["URL"],
+      city: data["Commune"].toLowerCase(),
+    });
+  }
 }
