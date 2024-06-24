@@ -1,61 +1,88 @@
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
-
 import constants from "../../constants/api";
-
-import Button from "../../components/Button";
-import FormInput from "../../components/FormInput";
-
 import { useAuth } from "../../components/AuthProvider";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from "../../components/ui/card";
+import { Input } from "../../../@/components/ui/input";
+import { Label } from "../../components/ui/label";
+import { Button } from "../../components/ui/button";
+import { Link } from "react-router-dom";
 
 export default function Login() {
-  let [email, setEmail] = useState("");
-  let [password, setPassword] = useState("");
+	let [email, setEmail] = useState("");
+	let [password, setPassword] = useState("");
 
-  const { setToken } = useAuth();
-  let navigate = useNavigate();
+	const { setToken } = useAuth();
+	let navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+	const handleSubmit = async (event) => {
+		event.preventDefault();
 
-    const data = await fetch(constants.API_PATH + "/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
+		const data = await fetch(constants.API_PATH + "/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ email, password }),
+		});
 
-    if (!data.ok) return;
+		if (!data.ok) return;
 
-    const { token } = await data.json();
-    setToken(token.token);
+		const { token } = await data.json();
+		setToken(token.token);
 
-    navigate("/home");
-  };
+		navigate("/home");
+	};
 
-  return (
-    <div>
-      <h1>Connexion</h1>
-
-      <form onSubmit={handleSubmit}>
-        <FormInput
-          label="Email"
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-        <FormInput
-          label="Password"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        <Button label="Login" />
-      </form>
-    </div>
-  );
+	return (
+		<div className="flex h-screen">
+			<Card className="w-full max-w-sm m-auto">
+				<CardHeader>
+					<CardTitle className="text-2xl">Se connecter</CardTitle>
+					<CardDescription>
+						Entrez vos identifiants afin de vous connecter.
+					</CardDescription>
+				</CardHeader>
+				<CardContent className="grid gap-4">
+					<div className="grid gap-2">
+						<Label htmlFor="email">Email</Label>
+						<Input
+							id="email"
+							type="email"
+							placeholder="user@example.com"
+							onChange={(e) => setEmail(e.target.value)}
+							required
+						/>
+					</div>
+					<div className="grid gap-2">
+						<Label htmlFor="password">Mot de passe</Label>
+						<Input
+							id="password"
+							type="password"
+							onChange={(e) => setPassword(e.target.value)}
+							required
+						/>
+					</div>
+				</CardContent>
+				<CardFooter className="grid gap-4">
+					<Button className="w-full" onClick={handleSubmit}>
+						Se connecter
+					</Button>
+					<div className="text-center text-sm">
+						Pas de compte ?{" "}
+						<Link to="/register" className="underline">
+							Créer un compte
+						</Link>
+					</div>
+				</CardFooter>
+			</Card>
+		</div>
+	);
 }

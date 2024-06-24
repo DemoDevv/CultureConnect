@@ -1,3 +1,3 @@
 export default {
-  DEVELOPMENT: true,
+	DEVELOPMENT: true,
 };
