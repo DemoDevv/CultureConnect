@@ -13,9 +13,9 @@ console.log(`Connected mongo on ${mongoURL}/${mongoDB}`);
 const { default: app } = await import("./app.mjs");
 
 const server = app.listen(PORT, () => {
-  console.log(
-    `Service [CultureAPI] listening on port ${PORT} (http://localhost:${PORT})`
-  );
+	console.log(
+		`Service [CultureAPI] listening on port ${PORT} (http://localhost:${PORT})`,
+	);
 });
 
 export default server;
