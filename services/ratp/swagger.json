@@ -1,23 +1,89 @@
 {
-	"swagger": "2.0",
-	"info": {
-		"title": "Proxy RATP API Documentation",
-		"description": "",
-		"version": "1.0.0"
-	},
-	"host": "localhost:8083/api/proxy_ratp",
-	"basePath": "/",
-	"schemes": ["http", "https"],
-	"paths": {
-		"/": {
-			"get": {
-				"description": "",
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				}
-			}
-		}
-	}
+  "swagger": "2.0",
+  "info": {
+    "title": "Proxy RATP API Documentation",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8083/api/ratp",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/stops": {
+      "post": {
+        "tags": [
+          "Stop"
+        ],
+        "description": "Endpoint to get all stops around a museum",
+        "parameters": [
+          {
+            "name": "museum",
+            "in": "body",
+            "description": "Museum object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "museofile": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "coordinates": {
+                  "type": "object",
+                  "properties": {
+                    "latitude": {
+                      "type": "string",
+                      "example": "48.808966"
+                    },
+                    "longitude": {
+                      "type": "string",
+                      "example": "2.130624"
+                    }
+                  }
+                },
+                "department": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "url": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "versailles"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
 }

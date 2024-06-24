@@ -2,6 +2,7 @@ import fs from "fs";
 import { mongoose } from "mongoose";
 import csv from "csv-parser";
 import Stop from "../api/models/stop.mjs";
+import { stopDao } from "../api/dao/stopDao.mjs";
 
 const filePath = "./data/stops.csv";
 const mongoURL = "mongodb://localhost:27017";
@@ -15,21 +16,27 @@ const results = [];
 let n = 0;
 
 fs.createReadStream(filePath)
-	.pipe(
-		csv({
-			separator: ";",
-		}),
-	)
-	.on("data", (data) => {
-		if (n > 1000) return;
+  .pipe(
+    csv({
+      separator: ";",
+    }),
+  )
+  .on("data", (data) => {
+    if (n > 1000) return;
 
-		console.log(Stop.fromCsvData(data));
+    results.push(Stop.fromCsvData(data));
 
-		n++;
-	})
-	.on("error", console.error)
-	.on("end", async () => {
-		console.log(`Stops import done ! Added ${results.length} stops`);
+    n++;
+  })
+  .on("error", console.error)
+  .on("end", async () => {
+    console.log(`Stops import done ! Added ${results.length} stops`);
+    try {
+      await stopDao.removeAll();
+      await stopDao.addMany(results);
+    } catch (e) {
+      console.error(e);
+    }
 
 		await mongoose.connection.close();
 	});
