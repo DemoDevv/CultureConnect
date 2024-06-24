@@ -3,16 +3,13 @@ import { distanceInKmBetweenEarthCoordinates } from "../helpers/coords.mjs";
 
 const stopController = {
   getAllStopsAroundMuseum: async (museum) => {
-    const stops = await stopDao.getByCity(museum.city);
-
-    if (!stops) return [];
-
+    const stops = stopDao.getByCity(museum.city);
     const nearestStops = stops.filter((stop) => {
       const distance = distanceInKmBetweenEarthCoordinates(
         museum.coordinates,
         stop.coordinates,
       );
-      return distance < 5;
+      return distance < 50;
     });
     return nearestStops;
   },
