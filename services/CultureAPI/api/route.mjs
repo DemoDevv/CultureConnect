@@ -77,7 +77,7 @@ routes.route("/artworks/:id").get(async (req, res) => {
 });
 
 //  Search
-routes.route("/search/:query").get(async (req, res) => {
+routes.route("/search").get(async (req, res) => {
   /*
   #swagger.tags = ['Artworks', 'Museums']
   #swagger.description = 'Endpoint to search a museum or an artwork via its name'
@@ -89,7 +89,7 @@ routes.route("/search/:query").get(async (req, res) => {
   }
   */
   const page = getPage(req.params);
-  const query = decodeURIComponent(req.params.query);
+  const query = decodeURIComponent(req.query.query);
 
   if (!query || query?.length == 0) {
     return res.status(200).send({
