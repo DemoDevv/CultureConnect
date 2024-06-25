@@ -27,13 +27,13 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-		const data = await fetch(constants.USERS_API_PATH + "/login", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ email, password }),
-		});
+    const data = await fetch(constants.USERS_API_PATH + "/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
     if (!data.ok) {
       setError("Email ou mot de passe incorrect.");
@@ -81,6 +81,9 @@ export default function Login() {
                 required
               />
             </div>
+            {error != null ? (
+              <div className="text-red-500 text-sm">{error}</div>
+            ) : null}
           </CardContent>
           <CardFooter className="grid gap-4">
             <Button className="w-full" onClick={handleSubmit}>
