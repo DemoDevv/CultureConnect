@@ -7,7 +7,7 @@ routes.route("/").get(async (req, res) => {
   res.status(200).send("Hello world !");
 });
 
-routes.route("/stops").get(async (req, res) => {
+routes.route("/stops").post(async (req, res) => {
   /*
   #swagger.tags = ['Stop']
   #swagger.description = 'Endpoint to get all stops around a museum'
