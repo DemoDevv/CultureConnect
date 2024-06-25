@@ -77,7 +77,7 @@ routes.route("/artworks/:id").get(async (req, res) => {
 });
 
 //  Search
-routes.route("/search").get(async (req, res) => {
+routes.route("/search").post(async (req, res) => {
   /*
   #swagger.tags = ['Artworks', 'Museums']
   #swagger.description = 'Endpoint to search a museum or an artwork via its name'
