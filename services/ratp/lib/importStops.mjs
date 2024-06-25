@@ -13,30 +13,25 @@ console.log(`Connected mongo on ${mongoURL}/${mongoDB}`);
 
 //  Pour le moment on garde une DB relativement légère avec 1000 oeuvres
 const results = [];
-let n = 0;
 
 fs.createReadStream(filePath)
-	.pipe(
-		csv({
-			separator: ";",
-		}),
-	)
-	.on("data", (data) => {
-		if (n > 1000) return;
+  .pipe(
+    csv({
+      separator: ";",
+    })
+  )
+  .on("data", (data) => {
+    results.push(Stop.fromCsvData(data));
+  })
+  .on("error", console.error)
+  .on("end", async () => {
+    console.log(`Stops import done ! Added ${results.length} stops`);
+    try {
+      await stopDao.removeAll();
+      await stopDao.addMany(results);
+    } catch (e) {
+      console.error(e);
+    }
 
-		results.push(Stop.fromCsvData(data));
-
-		n++;
-	})
-	.on("error", console.error)
-	.on("end", async () => {
-		console.log(`Stops import done ! Added ${results.length} stops`);
-		try {
-			await stopDao.removeAll();
-			await stopDao.addMany(results);
-		} catch (e) {
-			console.error(e);
-		}
-
-		await mongoose.connection.close();
-	});
+    await mongoose.connection.close();
+  });

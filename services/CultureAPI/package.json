@@ -1,29 +1,29 @@
 {
-	"name": "cultureapi",
-	"version": "1.0.0",
-	"main": "index.js",
-	"scripts": {
-		"start-gendoc": "node swagger-autogen.mjs",
-		"start": "node server.mjs",
-		"test": "c8 nyc mocha --timeout 10000 --cahe off --exit ./tests/**/*.mjs"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"description": "",
-	"dependencies": {
-		"c8": "^10.1.2",
-		"chai": "^5.1.1",
-		"cors": "^2.8.5",
-		"csv-parser": "^3.0.0",
-		"dotenv": "^16.4.5",
-		"express": "^4.19.2",
-		"mocha": "^10.4.0",
-		"mongodb-memory-server": "^9.3.0",
-		"mongoose": "^8.4.1",
-		"nyc": "^17.0.0",
-		"supertest": "^7.0.0",
-		"swagger-autogen": "^2.23.7",
-		"swagger-ui-express": "^5.0.1"
-	}
+  "name": "cultureapi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start-gendoc": "node swagger-autogen.mjs",
+    "start": "node server.mjs",
+    "test": "c8 nyc mocha --timeout 10000 --cahe off --exit ./tests/**/*.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "c8": "^10.1.2",
+    "chai": "^5.1.1",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.0.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mocha": "^10.4.0",
+    "mongodb-memory-server": "^9.3.0",
+    "mongoose": "^8.4.1",
+    "nyc": "^17.0.0",
+    "supertest": "^7.0.0",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1"
+  }
 }

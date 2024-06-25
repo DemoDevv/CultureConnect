@@ -4,11 +4,11 @@ import stopController from "./controllers/stopController.mjs";
 const routes = express.Router();
 
 routes.route("/").get(async (req, res) => {
-	res.status(200).send("Hello world !");
+  res.status(200).send("Hello world !");
 });
 
-routes.route("/stops").post(async (req, res) => {
-	/*
+routes.route("/stops").get(async (req, res) => {
+  /*
   #swagger.tags = ['Stop']
   #swagger.description = 'Endpoint to get all stops around a museum'
   #swagger.parameters['museum'] = {
@@ -30,10 +30,10 @@ routes.route("/stops").post(async (req, res) => {
     }
   }
   */
-	const museum = req.body;
-	const stops = await stopController.getAllStopsAroundMuseum(museum);
+  const museum = req.body;
+  const stops = await stopController.getAllStopsAroundMuseum(museum);
 
-	return res.status(200).send(stops);
+  return res.status(200).send(stops);
 });
 
 export default routes;

@@ -26,7 +26,7 @@ export default function Login() {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
-		const data = await fetch(constants.API_PATH + "/login", {
+		const data = await fetch(constants.USERS_API_PATH + "/login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
