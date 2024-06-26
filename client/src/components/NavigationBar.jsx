@@ -4,8 +4,8 @@ import { useAuth } from "./AuthProvider";
 import { useRef } from "react";
 
 export default function NavigationBar({}) {
-  const { token } = useAuth();
-  const isAuthenticated = useRef(token !== null);
+  const { getToken } = useAuth();
+  const isAuthenticated = useRef(getToken() !== null);
 
   return (
     <nav className="flex justify-center items-center h-[100px]">
@@ -17,7 +17,7 @@ export default function NavigationBar({}) {
           {isAuthenticated.current ? (
             <>
               {/* add favoris */}
-              <Link to={`/`}>Favoris</Link>
+              <Link to={`/favorites`}>Favoris</Link>
               <Link to={`/home`} className="text-[#B91C1B]">
                 Rechercher
               </Link>

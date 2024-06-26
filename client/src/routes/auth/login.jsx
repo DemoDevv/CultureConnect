@@ -41,7 +41,7 @@ export default function Login() {
     }
 
     const { token } = await data.json();
-    setToken(token.token);
+    setToken(token);
 
     navigate("/home");
   };

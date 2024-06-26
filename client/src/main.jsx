@@ -21,6 +21,7 @@ import Home from "./routes/home.jsx";
 import RequireAuth from "./components/RequireAuth.jsx";
 
 import constants from "./constants/development.js";
+import Favorites from "./routes/favorites";
 
 /*
 See the documentation for more information:
@@ -49,6 +50,7 @@ const router = createBrowserRouter(
 				}
 				errorElement={<ErrorPage />}
 			/>
+			<Route path="favorites" element={<Favorites />} errorElement={<ErrorPage />} />
 		</>,
 	),
 );

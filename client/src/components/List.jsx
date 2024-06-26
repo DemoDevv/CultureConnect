@@ -6,6 +6,7 @@ export default function List({ items }) {
       {items.map((item, index) => (
         <Item
           key={index}
+          id={item._id}
           name={item.name}
           author={item.author}
           size={item.size}

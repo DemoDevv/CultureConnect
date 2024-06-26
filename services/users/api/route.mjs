@@ -58,15 +58,15 @@ routes.get("/favorites", authenticateToken, async (req, res) => {
   return res.status(200).json(await userDao.getFavorites(req.user.email));
 });
 
-routes.put("/favorites/:artwork_id", authenticateToken, async (req, res) => {
-  const artwork_id = decodeURIComponent(req.params.artwork_id);
+routes.put("/favorites", authenticateToken, async (req, res) => {
+  const artwork = req.body;
 
-  if (!artwork_id) {
+  if (!artwork) {
     return res.sendStatus(400);
   }
 
   try {
-    await userController.addFavorite(req.user.email, artwork_id);
+    await userController.addFavorite(req.user.email, artwork);
   } catch (e) {
     console.error(e);
     return res.sendStatus(400);

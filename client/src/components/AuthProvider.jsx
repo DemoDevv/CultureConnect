@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext } from "react";
 
 /**
     context for the authentication token
@@ -13,10 +13,11 @@ const AuthContext = createContext();
     * @param {React.ReactNode} props.children
 */
 export function AuthProvider({ children }) {
-	let [token, setToken] = useState(null);
+    const getToken = () => localStorage.getItem("token");
+    const setToken = (token) => localStorage.setItem("token", token);
 
 	return (
-		<AuthContext.Provider value={{ token, setToken }}>
+		<AuthContext.Provider value={{ getToken, setToken }}>
 			{children}
 		</AuthContext.Provider>
 	);
