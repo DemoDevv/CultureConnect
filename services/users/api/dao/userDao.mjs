@@ -77,18 +77,18 @@ const userDao = {
 
     return user.favoris;
   },
-  addFavorite: async (email, artwork_id) => {
+  addFavorite: async (email, artwork) => {
     const user = await MongoUser.findOne({
       email,
     });
 
     if (!user) return Promise.reject("User not found");
 
-    if (user.favoris.includes(artwork_id)) {
+    if (user.favoris.map((f) => f.id).includes(artwork.id)) {
       return Promise.reject("Artwork already added to favorites");
     }
 
-    user.favoris.push(artwork_id);
+    user.favoris.push(artwork);
 
     await user.save();
   },

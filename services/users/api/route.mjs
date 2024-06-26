@@ -61,10 +61,6 @@ routes.get("/favorites", authenticateToken, async (req, res) => {
 routes.put("/favorites", authenticateToken, async (req, res) => {
   const artwork = req.body;
 
-  if (!artwork) {
-    return res.sendStatus(400);
-  }
-
   try {
     await userController.addFavorite(req.user.email, artwork);
   } catch (e) {
