@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { MapContainer, Marker } from "react-leaflet";
+import { MapContainer, Marker, Tooltip } from "react-leaflet";
 import { TileLayer } from "react-leaflet";
 import { divIcon } from "leaflet";
 
@@ -50,10 +50,12 @@ export default function Map({ setMuseumSelected }) {
 
   const customMarkerStop = divIcon({
     html: iconStop,
+    className: "",
   });
 
   const customMarkerMuseum = divIcon({
     html: iconMuseum,
+    className: ""
   });
 
   return (
@@ -81,7 +83,10 @@ export default function Map({ setMuseumSelected }) {
               },
             }}
             icon={customMarkerMuseum}
-          />
+          >
+            <Tooltip>
+              <b>{museum.name}</b> - {museum.city}</Tooltip>
+          </Marker>
         ))}
         {/* afficher les stops */}
         {stops.map((stop, index) => (
@@ -89,7 +94,9 @@ export default function Map({ setMuseumSelected }) {
             key={index}
             position={[stop.coordinates.latitude, stop.coordinates.longitude]}
             icon={customMarkerStop}
-          />
+          >
+            <Tooltip><b>{stop.name}</b> - ({stop.type})</Tooltip>
+          </Marker>
         ))}
       </MapContainer>
       <input
