@@ -1,7 +1,6 @@
 import userDao from "../dao/userDao.mjs";
 import { comparePassword } from "../helpers/hash.mjs";
 import { generateAccessToken } from "../helpers/jwt.mjs";
-import { artworkDao } from "../../../CultureAPI/api/dao/artworkDao.mjs";
 
 const userController = {
   register: async (user) => {
