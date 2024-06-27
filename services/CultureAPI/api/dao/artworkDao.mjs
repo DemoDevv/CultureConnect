@@ -28,8 +28,9 @@ const artworkSchema = new mongoose.Schema({
 const MongoArtwork = mongoose.model("artworkCollection", artworkSchema);
 
 const artworkDao = {
-  //  Indique si une oeuvre est valide, selon le schema
+  //  Indique si une oeuvre est valide, selon le schema.
   isValid: (artwork) => {
+    //  validateSync retourne undefined si l'objet n'est pas valide
     return new MongoArtwork({ ...artwork }).validateSync() === undefined;
   },
   //  Récupère les oeuvres

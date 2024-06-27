@@ -17,7 +17,7 @@ fs.createReadStream(filePath)
   .pipe(
     csv({
       separator: ";",
-    }),
+    })
   )
   .on("data", (data) => {
     results.push(Stop.fromCsvData(data));

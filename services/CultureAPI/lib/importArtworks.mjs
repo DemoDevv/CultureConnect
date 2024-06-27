@@ -10,8 +10,8 @@ const mongoURL = "mongodb://localhost:27017";
 const mongoDB = "DB";
 
 //  Regex pour valider les codes muséofile
-const isMuseofileAlmostValid = /\d{4}$/;
 const isMuseofileValid = /^M\d{4}$/;
+const isMuseofileAlmostValid = /\d{4}$/;
 
 await mongoose.connect(`${mongoURL}/${mongoDB}`);
 console.log(`Connected mongo on ${mongoURL}/${mongoDB}`);
@@ -27,11 +27,10 @@ fs.createReadStream(filePath)
 
     artwork.id_museum = museofile;
 
-    //  On n'ajoute que les oeuvres valides, avec un code muséofile
+    //  On n'ajoute que les oeuvres valides, avec un code muséofile valide
     if (!museofile || !artworkDao.isValid(artwork)) return;
 
     results.push(artwork);
-    n++;
   })
   .on("error", console.error)
   .on("end", async () => {
@@ -44,17 +43,20 @@ fs.createReadStream(filePath)
   });
 
 //  Permet de valider un code muséofile
+//  Exemple code muséofile: M1234
 //  Parfois le fichier CSV donne des codes muséofiles sans le préfixe M, auquel cas on l'ajoute si possible
 //  Ou encore parfois le code muséofile est précédé d'un texte autre, auquel cas on supprime le texte en surplus
 //  Retourne null si le code muséofile n'est pas valide
 //
 //  Afin de valider le maximum de code museofile
 function validateMuseofile(museofile) {
-  museofile = museofile.toUpperCase().trim();
-  museofile = museofile.length > 5 ? museofile.slice(0, 5) : museofile;
+  museofile = museofile.toUpperCase().trim(); //  On met le code en majuscule, et sans espaces avant et après le code
+  museofile = museofile.length > 5 ? museofile.slice(0, 5) : museofile; // On s'assure que le code muséofile est à 5 de longueur
 
+  //  SI le code est déjà valide, on le retourne
   if (isMuseofileValid.test(museofile)) return museofile;
 
+  //  Si le code muséofile ne commence pas avec un M, on le rajoute
   if (isMuseofileAlmostValid.test(museofile)) {
     museofile = `M${museofile}`;
   }
