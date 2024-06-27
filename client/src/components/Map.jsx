@@ -55,7 +55,7 @@ export default function Map({ setMuseumSelected }) {
 
   const customMarkerMuseum = divIcon({
     html: iconMuseum,
-    className: ""
+    className: "",
   });
 
   return (
@@ -64,7 +64,7 @@ export default function Map({ setMuseumSelected }) {
         style={{ height: "70vh", width: "100%" }}
         center={[48.8566, 2.3488]}
         zoom={11.5}
-        scrollWheelZoom={true}
+        scrollWheelZoom={false}
         className="rounded-md"
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -86,7 +86,8 @@ export default function Map({ setMuseumSelected }) {
             icon={customMarkerMuseum}
           >
             <Tooltip>
-              <b>{museum.name}</b> - {museum.city}</Tooltip>
+              <b>{museum.name}</b> - {museum.city}
+            </Tooltip>
           </Marker>
         ))}
         {/* afficher les stops */}
@@ -96,7 +97,9 @@ export default function Map({ setMuseumSelected }) {
             position={[stop.coordinates.latitude, stop.coordinates.longitude]}
             icon={customMarkerStop}
           >
-            <Tooltip><b>{stop.name}</b> - ({stop.type})</Tooltip>
+            <Tooltip>
+              <b>{stop.name}</b> - ({stop.type})
+            </Tooltip>
           </Marker>
         ))}
       </MapContainer>
