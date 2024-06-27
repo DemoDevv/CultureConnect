@@ -13,8 +13,8 @@ const AuthContext = createContext();
     * @param {React.ReactNode} props.children
 */
 export function AuthProvider({ children }) {
-    const getToken = () => localStorage.getItem("token");
-    const setToken = (token) => localStorage.setItem("token", token);
+    const getToken = () => sessionStorage.getItem("token");
+    const setToken = (token) => sessionStorage.setItem("token", token);
 
 	return (
 		<AuthContext.Provider value={{ getToken, setToken }}>

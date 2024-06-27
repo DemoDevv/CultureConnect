@@ -59,12 +59,13 @@ export default function Map({ setMuseumSelected }) {
   });
 
   return (
-    <div className="flex flex-col w-[70vw] bg-white rounded-[18px] p-5 gap-5">
+    <div className="flex flex-col w-2/3 bg-white rounded-lg p-5 gap-5">
       <MapContainer
-        style={{ height: "70vh", width: "100%", borderRadius: "18px" }}
+        style={{ height: "70vh", width: "100%" }}
         center={[48.8566, 2.3488]}
         zoom={11.5}
         scrollWheelZoom={true}
+        className="rounded-md"
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {/* afficher les musées */}
