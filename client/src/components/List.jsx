@@ -1,16 +1,13 @@
 import Item from "./Item";
 
-export default function List({ items }) {
+export default function List({ items, favoriteIds }) {
   return (
     <div className="flex flex-col gap-5">
       {items.map((item, index) => (
         <Item
           key={index}
-          id={item._id}
-          name={item.name}
-          author={item.author}
-          size={item.size}
-          type={item.type}
+          artwork={item}
+          isFavorite={favoriteIds.includes(item._id)}
         />
       ))}
     </div>

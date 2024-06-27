@@ -204,7 +204,7 @@ describe("api/users", function () {
 
     it("with artwork already in favorites", async function () {
       const artwork1 = {
-        id: 1,
+        _id: 1,
         id_museum: "M1",
         name: "Oeuvre 1",
         author: "Auteur 1",
@@ -237,7 +237,7 @@ describe("api/users", function () {
 
     it("adds artwork to favorites", async function () {
       const artwork1 = {
-        id: 1,
+        _id: 1,
         id_museum: "M1",
         name: "Oeuvre 1",
         author: "Auteur 1",
@@ -324,14 +324,23 @@ describe("api/users", function () {
         password: "testing",
       });
 
+      const artwork1 = {
+        _id: "1",
+        id_museum: "M1",
+        name: "Oeuvre 1",
+        author: "Auteur 1",
+        type: "Peinture 1",
+        size: "L: 20cm H: 36cm",
+      };
+
       const token = (
         await requestWithSupertest.post("/api/users/register").send(user1)
       ).body.token;
 
-      await userDao.addFavorite(user1.email, "A1");
+      await userDao.addFavorite(user1.email, artwork1);
 
       const response = await requestWithSupertest
-        .delete("/api/users/favorites/A1")
+        .delete("/api/users/favorites/1")
         .set("Authorization", `Bearer: ${token}`);
 
       const userFavorites = (await userDao.findUserByEmail("user1@example.com"))

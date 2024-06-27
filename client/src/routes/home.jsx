@@ -5,10 +5,25 @@ import List from "../components/List";
 import NavigationBar from "../components/NavigationBar";
 
 import constants from "../constants/api";
+import { useAuth } from "../components/AuthProvider";
 
 export default function Home() {
-  let [museumSelected, setMuseumSelected] = useState({});
-  let [artworks, setArtworks] = useState([]);
+  const [museumSelected, setMuseumSelected] = useState({});
+  const [artworks, setArtworks] = useState([]);
+  const [favoriteIds, setFavoriteIds] = useState([]);
+  const { getToken } = useAuth();
+
+  useEffect(() => {
+    fetch(`${constants.USERS_API_PATH}/favorites`, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    })
+      .then(r => r.json())
+      .then(r => {
+        setFavoriteIds(r.map(a => a._id))
+      });
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +43,7 @@ export default function Home() {
       <div className="flex flex-col items-center gap-20">
         <Map setMuseumSelected={setMuseumSelected} />
         {/* ajouter les oeuvres d'art du musée selectionné */}
-        <List items={artworks} />
+        <List items={artworks} favoriteIds={favoriteIds} />
       </div>
     </>
   );

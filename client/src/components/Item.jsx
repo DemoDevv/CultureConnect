@@ -2,8 +2,8 @@ import { useState } from "react";
 import constants from "../constants/api";
 import { useAuth } from "./AuthProvider";
 
-export default function Item(artwork) {
-  const [favoriteState, setFavoriteState] = useState("Add to favorite");
+export default function Item({ artwork, isFavorite }) {
+  const [favoriteState, setFavoriteState] = useState(isFavorite);
   const { getToken } = useAuth();
 
   function addToFavorite(artwork) {
@@ -17,8 +17,21 @@ export default function Item(artwork) {
     }).then((r) => {
       if (!r.ok) return setFavoriteState("Déjà en favoris");
 
-      setFavoriteState("Ajouté au favoris");
+      setFavoriteState(true);
     });
+  }
+
+  function removeFromFavorite(artwork_id) {
+    fetch(`${constants.USERS_API_PATH}/favorites/${artwork_id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer: ${getToken()}`,
+      }
+    }).then(r => {
+      if (!r.ok) return;
+
+      setFavoriteState(false);
+    })
   }
 
   return (

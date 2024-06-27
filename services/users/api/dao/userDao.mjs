@@ -84,7 +84,7 @@ const userDao = {
 
     if (!user) return Promise.reject("User not found");
 
-    if (user.favoris.map((f) => f.id).includes(artwork.id)) {
+    if (user.favoris.map((f) => f._id).includes(artwork._id)) {
       return Promise.reject("Artwork already added to favorites");
     }
 
@@ -99,11 +99,11 @@ const userDao = {
 
     if (!user) return Promise.reject("User not found");
 
-    if (!user.favoris.includes(artwork_id)) {
+    if (!user.favoris.map((f) => f._id).includes(artwork_id)) {
       return Promise.reject("Artwork not in your favorites");
     }
 
-    user.favoris = user.favoris.filter((f) => f !== artwork_id);
+    user.favoris = user.favoris.filter((f) => f._id !== artwork_id);
 
     await user.save();
   },
