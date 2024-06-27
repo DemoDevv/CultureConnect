@@ -11,14 +11,13 @@ const mongoDB = "DB";
 await mongoose.connect(`${mongoURL}/${mongoDB}`);
 console.log(`Connected mongo on ${mongoURL}/${mongoDB}`);
 
-//  Pour le moment on garde une DB relativement légère avec 1000 oeuvres
 const results = [];
 
 fs.createReadStream(filePath)
   .pipe(
     csv({
       separator: ";",
-    })
+    }),
   )
   .on("data", (data) => {
     results.push(Stop.fromCsvData(data));

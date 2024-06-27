@@ -1,16 +1,19 @@
 export default class Coordinates {
-	longitude;
-	latitude;
+  /*
+  Cette classe représente les coordonnées géographiques d'un point sur la Terre.
+  */
+  longitude;
+  latitude;
 
-	constructor(obj) {
-		this.longitude = +obj.longitude;
-		this.latitude = +obj.latitude;
-	}
+  constructor(obj) {
+    this.longitude = +obj.longitude;
+    this.latitude = +obj.latitude;
+  }
 
-	static fromCsvData(data) {
-		return new Coordinates({
-			longitude: data["Longitude"],
-			latitude: data["Latitude"],
-		});
-	}
+  static fromCsvData(data) {
+    return new Coordinates({
+      longitude: data["Longitude"],
+      latitude: data["Latitude"],
+    });
+  }
 }
