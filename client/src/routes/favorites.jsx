@@ -39,7 +39,7 @@ export default function Favorites() {
       <NavigationBar />
 
       <div className="mx-auto w-2/3 mt-4 flex flex-col gap-8">
-      <TypographyH1>Vos favoris</TypographyH1>
+        <TypographyH1>Vos favoris</TypographyH1>
 
         <List items={favorites} favoriteIds={favoriteIds} />
       </div>
