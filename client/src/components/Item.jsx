@@ -4,7 +4,7 @@ import { useAuth } from "./AuthProvider";
 
 export default function Item({ artwork, isFavorite }) {
   const [favoriteState, setFavoriteState] = useState(isFavorite);
-  const { getToken } = useAuth();
+  const { getToken, isAuthenticated } = useAuth();
 
   function addToFavorite(artwork) {
     fetch(`${constants.USERS_API_PATH}/favorites`, {
@@ -15,7 +15,7 @@ export default function Item({ artwork, isFavorite }) {
       },
       body: JSON.stringify(artwork),
     }).then((r) => {
-      if (!r.ok) return setFavoriteState("Déjà en favoris");
+      if (!r.ok) return setFavoriteState(false);
 
       setFavoriteState(true);
     });
@@ -26,12 +26,12 @@ export default function Item({ artwork, isFavorite }) {
       method: "DELETE",
       headers: {
         Authorization: `Bearer: ${getToken()}`,
-      }
-    }).then(r => {
+      },
+    }).then((r) => {
       if (!r.ok) return;
 
       setFavoriteState(false);
-    })
+    });
   }
 
   return (
@@ -53,17 +53,23 @@ export default function Item({ artwork, isFavorite }) {
       </div>
 
       <div className="flex w-full items-center justify-center">
-        <button
-          onClick={() => addToFavorite(artwork)}
-          className="flex gap-3 justify-center items-center"
-        >
-          {favoriteState}
-          {favoriteState ? (
-            <img src="../../assets/Heart.svg" className="w-5 h-5" />
-          ) : (
-            <img src="../../assets/Heart-vide.svg" className="w-5 h-5" />
-          )}
-        </button>
+        {isAuthenticated() && (
+          <button
+            onClick={() =>
+              favoriteState
+                ? removeFromFavorite(artwork._id)
+                : addToFavorite(artwork)
+            }
+            className="flex gap-3 justify-center items-center"
+          >
+            {favoriteState ? "Retirer des favoris" : "Ajouter aux favoris"}
+            {favoriteState ? (
+              <img src="../../assets/Heart.svg" className="w-5 h-5" />
+            ) : (
+              <img src="../../assets/Heart-vide.svg" className="w-5 h-5" />
+            )}
+          </button>
+        )}
       </div>
     </div>
   );
