@@ -126,6 +126,10 @@
             "schema": {
               "type": "object",
               "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "A000000000"
+                },
                 "id_museum": {
                   "type": "string",
                   "example": "E000000000"

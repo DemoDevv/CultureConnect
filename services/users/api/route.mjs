@@ -76,6 +76,7 @@ routes.put("/favorites", authenticateToken, async (req, res) => {
     required: true,
     type: 'object',
     schema: {
+      "_id": "A000000000",
       "id_museum": "E000000000",
       "name": "Le Lead",
       "author": "Mathieu",
