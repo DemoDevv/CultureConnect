@@ -28,13 +28,13 @@ export default function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-		const data = await fetch(constants.USERS_API_PATH + "/register", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ pseudonyme, email, password }),
-		});
+    const data = await fetch(constants.USERS_API_PATH + "/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ pseudonyme, email, password }),
+    });
 
     if (!data.ok) {
       setError("Email ou mot de passe incorrect.");
@@ -42,7 +42,7 @@ export default function Register() {
     }
 
     const { token } = await data.json();
-    setToken(token.token);
+    setToken(token);
 
     navigate("/home");
   };
