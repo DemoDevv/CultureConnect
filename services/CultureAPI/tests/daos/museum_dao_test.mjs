@@ -252,4 +252,50 @@ describe("Museum DAO", function () {
     const afterMuseums = await museumDao.findAll();
     expect(afterMuseums.length).to.be.equal(0);
   });
+
+  describe("searchByName", function () {
+    it("with no result", async function () {
+      const result = await museumDao.searchByName("mus");
+
+      expect(result).to.be.an("array");
+      expect(result.length).to.be.eql(0);
+    });
+
+    it("with a result", async function () {
+      const museum1 = new Museum({
+        id: 1,
+        museofile: "M1",
+        name: "Musée 1",
+        coordinates: {
+          longitude: 20,
+          latitude: 20,
+        },
+        department: "Loire-Atlantique",
+        address: "Road 1",
+        url: "https://example.com",
+        city: "Nantes",
+      });
+
+      const museum2 = new Museum({
+        museofile: "M2",
+        name: "Lusée 2",
+        coordinates: {
+          longitude: 20,
+          latitude: 20,
+        },
+        department: "Pays-de-la-Loire",
+        address: "Road 2",
+        url: "https://example2.com",
+        city: "Angers",
+      });
+
+      await museumDao.addMany([museum1, museum2]);
+
+      const result = await museumDao.searchByName("mus");
+
+      expect(result).to.be.an("array");
+      expect(result.length).to.be.eql(1);
+      expect(result[0].name).to.be.eql("Musée 1");
+    });
+  });
 });

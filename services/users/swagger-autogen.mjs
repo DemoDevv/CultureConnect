@@ -9,13 +9,20 @@ const outputFile = "./swagger.json";
 const endpointsFiles = ["./api/route.mjs"];
 
 const config = {
-	info: {
-		title: "User API Documentation",
-		description: "",
-	},
-	tags: [],
-	host: "localhost:" + serverPort + APIPATH,
-	schemes: ["http", "https"],
+  info: {
+    title: "User API Documentation",
+    description: "",
+  },
+  tags: [],
+  host: "localhost:" + serverPort + APIPATH,
+  schemes: ["http", "https"],
+  securityDefinitions: {
+    bearerAuth: {
+      type: "apiKey",
+      name: "Authorization",
+      in: "header",
+    },
+  },
 };
 
 swaggerAutogen(outputFile, endpointsFiles, config);

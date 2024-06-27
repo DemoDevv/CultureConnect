@@ -11,9 +11,7 @@ const mongoDB = "DB";
 await mongoose.connect(`${mongoURL}/${mongoDB}`);
 console.log(`Connected mongo on ${mongoURL}/${mongoDB}`);
 
-//  Pour le moment on garde une DB relativement légère avec 1000 oeuvres
 const results = [];
-let n = 0;
 
 fs.createReadStream(filePath)
   .pipe(
@@ -22,11 +20,7 @@ fs.createReadStream(filePath)
     }),
   )
   .on("data", (data) => {
-    if (n > 1000) return;
-
     results.push(Stop.fromCsvData(data));
-
-    n++;
   })
   .on("error", console.error)
   .on("end", async () => {
@@ -38,5 +32,5 @@ fs.createReadStream(filePath)
       console.error(e);
     }
 
-		await mongoose.connection.close();
-	});
+    await mongoose.connection.close();
+  });

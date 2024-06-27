@@ -3,10 +3,6 @@ import stopController from "./controllers/stopController.mjs";
 
 const routes = express.Router();
 
-routes.route("/").get(async (req, res) => {
-  res.status(200).send("Hello world !");
-});
-
 routes.route("/stops").post(async (req, res) => {
   /*
   #swagger.tags = ['Stop']

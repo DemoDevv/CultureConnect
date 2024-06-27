@@ -7,6 +7,7 @@ const stopController = {
 
     if (!stops) return [];
 
+    // Filter stops within 0.5 km of the museum
     const nearestStops = stops.filter((stop) => {
       const distance = distanceInKmBetweenEarthCoordinates(
         museum.coordinates,

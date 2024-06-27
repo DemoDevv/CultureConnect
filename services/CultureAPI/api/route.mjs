@@ -64,8 +64,7 @@ routes.route("/artworks/:id").get(async (req, res) => {
     in: 'path',
     description: 'ID of the artwork',
     required: true,
-    type: 'string
-  }
+    type: 'string'
   }
   */
   const id = decodeURIComponent(req.params.id);
@@ -75,6 +74,37 @@ routes.route("/artworks/:id").get(async (req, res) => {
     return res.status(404).send({ message: "Could not find artwork" });
 
   res.status(200).send(artwork);
+});
+
+//  Search
+routes.route("/search/:query").get(async (req, res) => {
+  /*
+  #swagger.tags = ['Artworks', 'Museums']
+  #swagger.description = 'Endpoint to search a museum or an artwork via its name'
+  #swagger.parameters['query'] = {
+    in: 'path',
+    description: 'Name of the artwork or museum',
+    required: true,
+    type: 'string'
+  }
+  */
+  const page = getPage(req.params);
+  const query = decodeURIComponent(req.params.query);
+
+  if (!query || query?.length == 0) {
+    return res.status(200).send({
+      museums: [],
+      artworks: [],
+    });
+  }
+
+  const artworks = await artworkController.findByName(query, page);
+  const museums = await museumController.findByName(query, page);
+
+  return res.status(200).send({
+    museums,
+    artworks,
+  });
 });
 
 function getPage(parameters) {

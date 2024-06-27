@@ -1,4 +1,10 @@
-export default function Input({ label, type, placeholder, value, onChange }) {
+export default function FormInput({
+	label,
+	type,
+	placeholder,
+	value,
+	onChange,
+}) {
 	return (
 		<div>
 			<label>{label}</label>

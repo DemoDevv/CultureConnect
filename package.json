@@ -8,7 +8,8 @@
     "client": "cd client && npm run dev",
     "users": "cd services/users && npm start",
     "cultureapi": "cd services/CultureAPI && npm start",
-    "all": "concurrently \"npm run client\" \"npm run users\" \"npm run cultureapi\""
+    "ratp": "cd services/ratp && npm start",
+    "all": "concurrently \"npm run client\" \"npm run users\" \"npm run ratp\" \"npm run cultureapi\""
   },
   "keywords": [],
   "author": "",

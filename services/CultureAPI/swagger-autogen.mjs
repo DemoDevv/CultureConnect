@@ -9,13 +9,13 @@ const outputFile = "./swagger.json";
 const endpointsFiles = ["./api/route.mjs"];
 
 const config = {
-  info: {
-    title: "Culture API Documentation",
-    description: "",
-  },
-  tags: [],
-  host: "localhost:" + serverPort + APIPATH,
-  schemes: ["http", "https"],
+	info: {
+		title: "Culture API Documentation",
+		description: "",
+	},
+	tags: [],
+	host: "localhost:" + serverPort + APIPATH,
+	schemes: ["http", "https"],
 };
 
 swaggerAutogen(outputFile, endpointsFiles, config);

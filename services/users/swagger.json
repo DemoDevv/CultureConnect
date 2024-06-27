@@ -1,87 +1,203 @@
 {
-	"swagger": "2.0",
-	"info": {
-		"title": "User API Documentation",
-		"description": "",
-		"version": "1.0.0"
-	},
-	"host": "localhost:8082/api/users",
-	"basePath": "/",
-	"schemes": ["http", "https"],
-	"paths": {
-		"/register": {
-			"post": {
-				"tags": ["User"],
-				"description": "Endpoint to register a new user",
-				"parameters": [
-					{
-						"name": "user",
-						"in": "body",
-						"description": "User object",
-						"required": true,
-						"schema": {
-							"type": "object",
-							"properties": {
-								"pseudonyme": {
-									"type": "string",
-									"example": "JohnDoe"
-								},
-								"email": {
-									"type": "string",
-									"example": "jhondoe@test.fr"
-								},
-								"password": {
-									"type": "string",
-									"example": "password"
-								}
-							}
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK"
-					},
-					"400": {
-						"description": "Bad Request"
-					}
-				}
-			}
-		},
-		"/login": {
-			"post": {
-				"tags": ["User"],
-				"description": "Endpoint to login a user",
-				"parameters": [
-					{
-						"name": "user",
-						"in": "body",
-						"description": "User object",
-						"required": true,
-						"schema": {
-							"type": "object",
-							"properties": {
-								"email": {
-									"type": "string",
-									"example": "jhondoe@test.fr"
-								},
-								"password": {
-									"type": "string",
-									"example": "password"
-								}
-							}
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK"
-					},
-					"400": {
-						"description": "Bad Request"
-					}
-				}
-			}
-		}
-	}
+  "swagger": "2.0",
+  "info": {
+    "title": "User API Documentation",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8082/api/users",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/register": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to register a new user",
+        "parameters": [
+          {
+            "name": "user",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pseudonyme": {
+                  "type": "string",
+                  "example": "JohnDoe"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "jhondoe@test.fr"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to login a user",
+        "parameters": [
+          {
+            "name": "user",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "jhondoe@test.fr"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/favorites": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to get all favorites of a user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to add a favorite to a user",
+        "parameters": [
+          {
+            "name": "artwork",
+            "in": "body",
+            "description": "Artwork object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "A000000000"
+                },
+                "id_museum": {
+                  "type": "string",
+                  "example": "E000000000"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Le Lead"
+                },
+                "author": {
+                  "type": "string",
+                  "example": "Mathieu"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "Peinture"
+                },
+                "size": {
+                  "type": "string",
+                  "example": "100x100"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/favorites/{artwork_id}": {
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint to remove a favorite from a user",
+        "parameters": [
+          {
+            "name": "artwork_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Artwork id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  }
 }

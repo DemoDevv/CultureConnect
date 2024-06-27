@@ -9,25 +9,25 @@ const filePath = "./data/joconde.csv";
 const mongoURL = "mongodb://localhost:27017";
 const mongoDB = "DB";
 
+//  Regex pour valider les codes muséofile
 const isMuseofileAlmostValid = /\d{4}$/;
 const isMuseofileValid = /^M\d{4}$/;
+
 await mongoose.connect(`${mongoURL}/${mongoDB}`);
 console.log(`Connected mongo on ${mongoURL}/${mongoDB}`);
 
-//  Pour le moment on garde une DB relativement légère avec 1000 oeuvres
 const results = [];
-let n = 0;
 
 fs.createReadStream(filePath)
   .pipe(csv())
   .on("data", (data) => {
-    if (n > 1000) return;
-
+    //  Transforme la ligne du csv en objet oeuvre
     const artwork = Artwork.fromCsvData(data);
     const museofile = validateMuseofile(artwork.id_museum);
 
     artwork.id_museum = museofile;
 
+    //  On n'ajoute que les oeuvres valides, avec un code muséofile
     if (!museofile || !artworkDao.isValid(artwork)) return;
 
     results.push(artwork);
@@ -35,6 +35,7 @@ fs.createReadStream(filePath)
   })
   .on("error", console.error)
   .on("end", async () => {
+    //  On reset la collection et ajoute toutes les oeuvres validées
     await artworkDao.removeAll();
     await artworkDao.addMany(results);
 
