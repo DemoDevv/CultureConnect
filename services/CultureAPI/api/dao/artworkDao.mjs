@@ -28,9 +28,11 @@ const artworkSchema = new mongoose.Schema({
 const MongoArtwork = mongoose.model("artworkCollection", artworkSchema);
 
 const artworkDao = {
+  //  Indique si une oeuvre est valide, selon le schema
   isValid: (artwork) => {
     return new MongoArtwork({ ...artwork }).validateSync() === undefined;
   },
+  //  Récupère les oeuvres
   findAll: async (page = 1) => {
     const data = await MongoArtwork.find({})
       .skip((page - 1) * itemsPerPage)
@@ -65,6 +67,7 @@ const artworkDao = {
       return null;
     }
   },
+  //  Chercher des oeuvres appartenant à un musée
   getByMuseofile: async (museofile, page = 1) => {
     const data = await MongoArtwork.find({
       id_museum: museofile,

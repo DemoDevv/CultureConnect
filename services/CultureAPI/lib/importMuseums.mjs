@@ -11,24 +11,27 @@ const mongoDB = "DB";
 await mongoose.connect(`${mongoURL}/${mongoDB}`);
 console.log(`Connected mongo on ${mongoURL}/${mongoDB}`);
 
+const { museumDao } = await import("../api/dao/museumDao.mjs");
+
 const results = [];
 
 fs.createReadStream(filePath)
-	.pipe(csv())
-	.on("data", (data) => {
-		const museum = Museum.fromCsvData(data);
+  .pipe(csv())
+  .on("data", (data) => {
+    //  Transforme la ligne du csv en objet musée
+    const museum = Museum.fromCsvData(data);
 
-		if (!museum.isInIleDeFrance()) return;
+    //	on ne garde que les musées se situant en IDF
+    if (!museum.isInIleDeFrance()) return;
 
-		results.push(museum);
-	})
-	.on("error", console.error)
-	.on("end", async () => {
-		const { museumDao } = await import("../api/dao/museumDao.mjs");
+    results.push(museum);
+  })
+  .on("error", console.error)
+  .on("end", async () => {
+    //  On reset la collection et ajoute toutes les musées validées
+    await museumDao.removeAll();
+    await museumDao.addMany(results);
 
-		await museumDao.removeAll();
-		await museumDao.addMany(results);
-
-		console.log("Museum import done !");
-		exit(0);
-	});
+    console.log("Museum import done !");
+    exit(0);
+  });
