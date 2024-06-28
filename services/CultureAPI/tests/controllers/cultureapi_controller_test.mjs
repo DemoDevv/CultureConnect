@@ -33,9 +33,7 @@ describe("api/culture", function () {
     it("with empty result", async function () {
       const result = await requestWithSupertest.get("/api/culture/search");
 
-      expect(result.status).to.be.eql(200);
-      expect(result.body.artworks).to.be.eql([]);
-      expect(result.body.museums).to.be.eql([]);
+      expect(result.status).to.be.eql(404);
     });
 
     it("with artworks", async function () {
@@ -87,9 +85,7 @@ describe("api/culture", function () {
       await artworkDao.addMany([artwork1, artwork2]);
       await museumDao.addMany([museum1, museum2]);
 
-      const result = await requestWithSupertest.get(
-        `/api/culture/search?query=pein`
-      );
+      const result = await requestWithSupertest.get(`/api/culture/search/pein`);
 
       expect(result.status).to.be.eql(200);
       expect(result.body.museums).to.be.eql([]);
@@ -147,9 +143,7 @@ describe("api/culture", function () {
       await artworkDao.addMany([artwork1, artwork2]);
       await museumDao.addMany([museum1, museum2]);
 
-      const result = await requestWithSupertest.get(
-        `/api/culture/search?query=lus`
-      );
+      const result = await requestWithSupertest.get(`/api/culture/search/lus`);
 
       expect(result.status).to.be.eql(200);
       expect(result.body.artworks).to.be.eql([]);
@@ -207,9 +201,7 @@ describe("api/culture", function () {
       await artworkDao.addMany([artwork1, artwork2]);
       await museumDao.addMany([museum1, museum2]);
 
-      const result = await requestWithSupertest.get(
-        `/api/culture/search?query=1`
-      );
+      const result = await requestWithSupertest.get(`/api/culture/search/1`);
 
       expect(result.status).to.be.eql(200);
 

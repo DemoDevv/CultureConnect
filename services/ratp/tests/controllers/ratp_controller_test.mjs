@@ -2,9 +2,12 @@ import { assert, should, expect } from "chai";
 import supertest from "supertest";
 import server from "../../server.mjs";
 import { mongoose } from "mongoose";
+import Stop from "../../api/models/stop.mjs";
+import Coordinates from "../../api/models/coordinates.mjs";
 
 const requestWithSupertest = supertest(server);
 
+//  TODO
 const { stopDao } = await import("../../api/dao/stopDao.mjs");
 
 describe("api/ratp", function () {
@@ -18,7 +21,7 @@ describe("api/ratp", function () {
   });
 
   beforeEach(async function () {
-    await artworkDao.removeAll();
+    // await artworkDao.removeAll();
   });
 
   after(async function () {

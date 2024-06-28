@@ -24,6 +24,16 @@ Import des arrêts d'Île-de-France:
 node .\lib\importStops.mjs
 ```
 
+## Lancement des tests de l'applications
+
+L'application possède des jeux de tests pour chaque microservice. Il est possible de lancer chaque test de microservice avec ces commandes, à la racine du projet:
+
+```shell
+npm run test-users
+npm run test-cultureapi
+npm run test-ratp
+```
+
 ## Lancement de toute l'application
 
 Afin de lancer l'ensemble de l'applicaion (client en react + micro-services), on peut lancer une commande à la racine du projet:

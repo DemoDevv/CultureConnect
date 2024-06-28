@@ -7,8 +7,11 @@
     "seed": "./scripts/seed.sh",
     "client": "cd client && npm run dev",
     "users": "cd services/users && npm start",
+    "test-users": "cd services/users && npm test",
     "cultureapi": "cd services/CultureAPI && npm start",
+    "test-cultureapi": "cd services/CultureAPI && npm test",
     "ratp": "cd services/ratp && npm start",
+    "test-ratp": "cd services/ratp && npm test",
     "all": "concurrently \"npm run client\" \"npm run users\" \"npm run ratp\" \"npm run cultureapi\""
   },
   "keywords": [],
